@@ -1,0 +1,4296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>M&M Asociados | Ingeniería y Arquitectura</title>
+
+    <style>
+        /* =========================================================
+           VARIABLES GENERALES
+        ========================================================= */
+
+        :root {
+            --azul: #142f55;
+            --azul-oscuro: #0c1d35;
+            --amarillo: #f2bf33;
+            --blanco: #ffffff;
+            --gris-claro: #f4f5f7;
+            --gris: #6e7681;
+            --texto: #17202a;
+            --linea: #dfe3e8;
+
+            --ancho: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: var(--texto);
+            background: var(--blanco);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================================================
+           ELEMENTOS GENERALES
+        ========================================================= */
+
+        .contenedor {
+            width: min(90%, var(--ancho));
+            margin: 0 auto;
+        }
+
+        .numero-seccion {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            color: var(--azul);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+
+            margin-bottom: 30px;
+        }
+
+        .numero-seccion::after {
+            content: "";
+            width: 70px;
+            height: 2px;
+            background: var(--amarillo);
+        }
+
+        .titulo-seccion {
+            font-size: clamp(2.3rem, 5vw, 4.6rem);
+            line-height: 1.02;
+            font-weight: 500;
+            letter-spacing: -0.04em;
+        }
+
+        .texto-gris {
+            color: var(--gris);
+        }
+
+        /* =========================================================
+           NAVEGACIÓN
+        ========================================================= */
+
+        header {
+            position: absolute;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        .navegacion {
+            height: 95px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            color: var(--azul);
+        }
+
+        .logo-principal {
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .logo-secundario {
+            margin-top: 5px;
+
+            font-size: 0.68rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            position: relative;
+
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        nav a:not(.boton-nav)::after {
+            content: "";
+            position: absolute;
+
+            left: 0;
+            bottom: -7px;
+
+            width: 0;
+            height: 2px;
+
+            background: var(--amarillo);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .boton-nav {
+            background: var(--azul);
+            color: white;
+
+            padding: 13px 22px;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .boton-nav:hover {
+            background: var(--amarillo);
+            color: var(--azul);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           01 INICIO
+        ========================================================= */
+
+        #inicio {
+            min-height: 100vh;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+        /* Retícula arquitectónica de fondo */
+        #inicio::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(20, 47, 85, 0.045) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(20, 47, 85, 0.045) 1px,
+                    transparent 1px
+                );
+
+            background-size: 80px 80px;
+
+            pointer-events: none;
+        }
+
+        .inicio-grid {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: 45% 55%;
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        .inicio-contenido {
+            padding: 150px 7vw 120px max(5vw, calc((100vw - 1200px) / 2));
+        }
+
+        .inicio-etiqueta {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            color: var(--azul);
+
+            font-size: 0.73rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+
+            margin-bottom: 32px;
+        }
+
+        .inicio-etiqueta span {
+            width: 38px;
+            height: 2px;
+            background: var(--amarillo);
+        }
+
+        .inicio-contenido h1 {
+            max-width: 610px;
+
+            color: var(--azul-oscuro);
+
+            font-size: clamp(3.2rem, 5.5vw, 6.2rem);
+            line-height: 0.97;
+            font-weight: 500;
+            letter-spacing: -0.055em;
+
+            margin-bottom: 32px;
+        }
+
+        .inicio-contenido h1 strong {
+            color: var(--azul);
+            font-weight: 700;
+        }
+
+        .inicio-contenido p {
+            max-width: 510px;
+
+            color: var(--gris);
+
+            font-size: 1rem;
+
+            margin-bottom: 38px;
+        }
+
+        .botones-inicio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .boton {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+
+            min-height: 54px;
+
+            padding: 0 25px;
+
+            border: 1px solid var(--azul);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+
+            transition: all 0.3s ease;
+        }
+
+        .boton-principal {
+            background: var(--azul);
+            color: white;
+        }
+
+        .boton-principal:hover {
+            background: var(--amarillo);
+            color: var(--azul);
+            border-color: var(--amarillo);
+        }
+
+        .boton-secundario {
+            background: transparent;
+            color: var(--azul);
+        }
+
+        .boton-secundario:hover {
+            background: var(--azul);
+            color: white;
+        }
+
+        /* ---------------------------------------------------------
+           Imagen / composición derecha
+        --------------------------------------------------------- */
+
+        .inicio-imagen {
+            position: relative;
+
+            height: 100vh;
+            min-height: 700px;
+
+            background:
+                linear-gradient(
+                    rgba(10, 29, 53, 0.2),
+                    rgba(10, 29, 53, 0.35)
+                ),
+                url("obra-principal.png") center / cover;
+
+            overflow: hidden;
+        }
+
+        /*
+           Si todavía no tienes obra-principal.jpg,
+           se verá el fondo azul que colocamos debajo.
+        */
+
+        .inicio-imagen::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--azul) 0%,
+                    var(--azul-oscuro) 100%
+                );
+        }
+
+        /* Diagonal inspirada en el logotipo */
+        .inicio-imagen::after {
+            content: "";
+            position: absolute;
+
+            left: -100px;
+            top: -10%;
+
+            width: 180px;
+            height: 120%;
+
+            background: var(--blanco);
+
+            transform: rotate(8deg);
+        }
+
+        .marca-imagen {
+            position: absolute;
+
+            bottom: 40px;
+            right: 45px;
+
+            color: rgba(255,255,255,0.85);
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .marca-imagen span:first-child {
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .marca-imagen span:last-child {
+            font-size: 2.1rem;
+            font-weight: 300;
+        }
+
+        .numero-inicio {
+            position: absolute;
+
+            bottom: 28px;
+            left: max(5vw, calc((100vw - 1200px) / 2));
+
+            color: var(--azul);
+
+            font-size: 0.67rem;
+            letter-spacing: 0.15em;
+        }
+
+        /* =========================================================
+           02 NOSOTROS
+        ========================================================= */
+
+        #nosotros {
+            padding: 140px 0;
+            background: var(--blanco);
+        }
+
+        .nosotros-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.85fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .nosotros-texto h2 {
+            color: var(--azul-oscuro);
+            margin-bottom: 32px;
+        }
+
+        .nosotros-texto > p {
+            max-width: 620px;
+            margin-bottom: 45px;
+        }
+
+        .frase {
+            position: relative;
+
+            max-width: 590px;
+
+            padding-left: 28px;
+
+            border-left: 3px solid var(--amarillo);
+
+            color: var(--azul);
+
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+
+        /* Imagen Nosotros */
+
+        .nosotros-imagen {
+            min-height: 550px;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    rgba(20,47,85,0.08),
+                    rgba(20,47,85,0.15)
+                ),
+                url("equipo-obra.jpg") center / cover;
+
+            background-color: var(--azul);
+        }
+
+        .nosotros-imagen::before {
+            content: "M&M";
+            position: absolute;
+
+            top: -40px;
+            right: -15px;
+
+            color: var(--amarillo);
+
+            font-size: clamp(5rem, 10vw, 9rem);
+            font-weight: 800;
+            line-height: 1;
+
+            opacity: 0.14;
+
+            pointer-events: none;
+        }
+
+        .datos-imagen {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            background: var(--azul);
+            color: white;
+
+            padding: 28px 35px;
+        }
+
+        .datos-imagen strong {
+            display: block;
+
+            color: var(--amarillo);
+
+            font-size: 2.5rem;
+            line-height: 1;
+            font-weight: 500;
+
+            margin-bottom: 5px;
+        }
+
+        .datos-imagen span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        /* =========================================================
+           LÍNEA DE TIEMPO
+        ========================================================= */
+
+        .linea-tiempo {
+            margin-top: 100px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            position: relative;
+        }
+
+        .linea-tiempo::before {
+            content: "";
+            position: absolute;
+
+            top: 13px;
+            left: 0;
+            right: 0;
+
+            height: 1px;
+            background: var(--linea);
+        }
+
+        .evento {
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .punto {
+            position: relative;
+            z-index: 2;
+
+            width: 27px;
+            height: 27px;
+
+            border: 7px solid white;
+            outline: 1px solid var(--amarillo);
+
+            background: var(--amarillo);
+
+            margin-bottom: 25px;
+        }
+
+        .evento .anio {
+            display: block;
+
+            color: var(--azul);
+
+            font-size: 2rem;
+            font-weight: 500;
+
+            margin-bottom: 8px;
+        }
+
+        .evento h3 {
+            color: var(--azul-oscuro);
+
+            font-size: 0.95rem;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .evento p {
+            color: var(--gris);
+            font-size: 0.88rem;
+            max-width: 250px;
+        }
+
+        /* =========================================================
+           03 SERVICIOS
+        ========================================================= */
+
+        #servicios {
+            position: relative;
+            overflow: hidden;
+
+            background: var(--azul-oscuro);
+            color: white;
+
+            padding: 140px 0;
+        }
+
+        #servicios::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 90px 90px;
+        }
+
+        .servicios-contenido {
+            position: relative;
+            z-index: 2;
+
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 100px;
+        }
+
+        #servicios .numero-seccion {
+            color: var(--amarillo);
+        }
+
+        .servicios-intro h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .servicios-intro p {
+            color: rgba(255,255,255,0.62);
+            max-width: 430px;
+        }
+
+        /* Lista */
+
+        .lista-servicios {
+            border-top: 1px solid rgba(255,255,255,0.18);
+        }
+
+        .servicio {
+            position: relative;
+
+            width: 100%;
+
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+
+            background: transparent;
+            color: white;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            padding: 27px 10px;
+
+            transition:
+                padding-left 0.35s ease,
+                background 0.35s ease;
+        }
+
+        .servicio-linea {
+            display: grid;
+            grid-template-columns: 55px 1fr auto;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .servicio-numero {
+            color: var(--amarillo);
+
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+        }
+
+        .servicio-titulo {
+            font-size: clamp(1rem, 2vw, 1.45rem);
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .flecha {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .servicio:not(.activo):hover {
+    padding-left: 24px;
+    background: rgba(255,255,255,0.04);
+}
+
+.servicio:not(.activo):hover .flecha {
+    transform: translateX(5px);
+}
+
+.servicio.activo:hover {
+    background: var(--amarillo);
+    color: var(--azul-oscuro);
+}
+
+        .servicio.activo {
+            background: var(--amarillo);
+            color: var(--azul-oscuro);
+
+            padding-left: 24px;
+        }
+
+        .servicio.activo .servicio-numero {
+            color: var(--azul);
+        }
+
+        /* Descripción dinámica */
+
+        .detalle-servicio {
+            margin-top: 35px;
+
+            min-height: 150px;
+
+            padding: 25px 0 0;
+
+            color: rgba(255,255,255,0.75);
+        }
+
+        .detalle-servicio h3 {
+            color: var(--amarillo);
+
+            margin-bottom: 8px;
+
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .detalle-servicio p {
+            max-width: 600px;
+
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+/* =========================================================
+   04 PROYECTOS
+========================================================= */
+
+#proyectos {
+    padding: 140px 0;
+    background: var(--blanco);
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   CABECERA
+--------------------------------------------------------- */
+
+.proyectos-encabezado {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 80px;
+    align-items: end;
+
+    margin-bottom: 70px;
+}
+
+.proyectos-encabezado h2 {
+    color: var(--azul-oscuro);
+}
+
+.proyectos-intro {
+    color: var(--gris);
+    max-width: 500px;
+    justify-self: end;
+}
+
+
+/* ---------------------------------------------------------
+   FILTROS
+--------------------------------------------------------- */
+
+.filtros-proyectos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    margin-bottom: 50px;
+
+    border-bottom: 1px solid var(--linea);
+}
+
+.filtro-proyecto {
+    position: relative;
+
+    padding: 0 0 14px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--gris);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: color 0.3s ease;
+}
+
+.filtro-proyecto::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -1px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--amarillo);
+
+    transition: width 0.3s ease;
+}
+
+.filtro-proyecto:hover {
+    color: var(--azul);
+}
+
+.filtro-proyecto.activo {
+    color: var(--azul);
+}
+
+.filtro-proyecto.activo::after {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   GRID DE PROYECTOS
+--------------------------------------------------------- */
+
+.grid-proyectos {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+
+    gap: 45px 28px;
+}
+
+
+/* Proyecto destacado */
+
+.proyecto:nth-child(1) {
+    grid-column: span 8;
+}
+
+.proyecto:nth-child(2) {
+    grid-column: span 4;
+}
+
+
+/* Proyectos secundarios */
+
+.proyecto:nth-child(3),
+.proyecto:nth-child(4),
+.proyecto:nth-child(5),
+.proyecto:nth-child(6) {
+    grid-column: span 6;
+}
+
+
+/* ---------------------------------------------------------
+   TARJETA DE PROYECTO
+--------------------------------------------------------- */
+
+.proyecto {
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+.proyecto.oculto {
+    display: none;
+}
+
+.proyecto-imagen {
+    position: relative;
+
+    width: 100%;
+    height: 430px;
+
+    overflow: hidden;
+
+    background: var(--gris-claro);
+}
+
+.proyecto:nth-child(1) .proyecto-imagen {
+    height: 600px;
+}
+
+.proyecto:nth-child(2) .proyecto-imagen {
+    height: 600px;
+}
+
+.proyecto-imagen img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s ease,
+        filter 0.7s ease;
+}
+
+
+/* ---------------------------------------------------------
+   OVERLAY
+--------------------------------------------------------- */
+
+.proyecto-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(9, 27, 49, 0.05),
+            rgba(9, 27, 49, 0.82)
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.45s ease;
+}
+
+.proyecto:hover .proyecto-overlay {
+    opacity: 1;
+}
+
+.proyecto:hover img {
+    transform: scale(1.045);
+    filter: saturate(0.8);
+}
+
+
+/* Número */
+
+.proyecto-numero {
+    align-self: flex-end;
+
+    color: var(--amarillo);
+
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+}
+
+
+/* Contenido dentro de la foto */
+
+.proyecto-overlay-contenido {
+    transform: translateY(20px);
+
+    transition: transform 0.45s ease;
+}
+
+.proyecto:hover .proyecto-overlay-contenido {
+    transform: translateY(0);
+}
+
+.proyecto-overlay-categoria {
+    display: block;
+
+    color: var(--amarillo);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    margin-bottom: 8px;
+}
+
+.proyecto-overlay h3 {
+    max-width: 520px;
+
+    color: white;
+
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    font-weight: 400;
+
+    margin-bottom: 12px;
+}
+
+.proyecto-overlay p {
+    color: rgba(255,255,255,0.75);
+
+    font-size: 0.85rem;
+}
+
+
+/* ---------------------------------------------------------
+   INFORMACIÓN INFERIOR
+--------------------------------------------------------- */
+
+.proyecto-info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+
+    padding-top: 18px;
+}
+
+.proyecto-categoria {
+    display: block;
+
+    color: var(--amarillo);
+
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    margin-bottom: 6px;
+}
+
+.proyecto-info h3 {
+    color: var(--azul);
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.proyecto-ubicacion {
+    margin-top: 5px;
+
+    color: var(--gris);
+
+    font-size: 0.78rem;
+}
+
+.proyecto-flecha {
+    color: var(--azul);
+
+    font-size: 1.5rem;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+.proyecto:hover .proyecto-flecha {
+    transform: translate(4px, -4px);
+    color: var(--amarillo);
+}
+
+
+/* ---------------------------------------------------------
+   CIERRE DE SECCIÓN
+--------------------------------------------------------- */
+
+.proyectos-cierre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 40px;
+
+    margin-top: 90px;
+    padding-top: 35px;
+
+    border-top: 1px solid var(--linea);
+}
+
+.proyectos-cierre p {
+    max-width: 620px;
+
+    color: var(--gris);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE PROYECTOS
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .proyectos-encabezado {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .proyectos-intro {
+        justify-self: start;
+    }
+
+    .proyecto:nth-child(n) {
+        grid-column: span 6;
+    }
+
+    .proyecto:nth-child(n) .proyecto-imagen {
+        height: 430px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    #proyectos {
+        padding: 100px 0;
+    }
+
+    .filtros-proyectos {
+        gap: 18px;
+    }
+
+    .proyecto:nth-child(n) {
+        grid-column: 1 / -1;
+    }
+
+    .proyecto:nth-child(n) .proyecto-imagen {
+        height: 380px;
+    }
+
+    .proyectos-cierre {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .proyecto-overlay {
+        opacity: 1;
+
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(9, 27, 49, 0.05),
+                rgba(9, 27, 49, 0.75)
+            );
+    }
+
+    .proyecto-overlay-contenido {
+        transform: translateY(0);
+    }
+}
+/* =========================================================
+   05 NUESTRO PROCESO
+========================================================= */
+
+#proceso {
+    position: relative;
+    overflow: hidden;
+
+    padding: 140px 0;
+
+    background: var(--gris-claro);
+}
+
+
+/* Retícula arquitectónica */
+
+#proceso::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(20, 47, 85, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(20, 47, 85, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 90px 90px;
+
+    pointer-events: none;
+}
+
+
+.proceso-contenido {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   ENCABEZADO
+--------------------------------------------------------- */
+
+.proceso-encabezado {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+
+    gap: 80px;
+
+    align-items: end;
+
+    margin-bottom: 90px;
+}
+
+
+.proceso-encabezado h2 {
+    color: var(--azul-oscuro);
+}
+
+
+.proceso-intro {
+    max-width: 500px;
+
+    color: var(--gris);
+
+    justify-self: end;
+}
+
+
+/* ---------------------------------------------------------
+   NAVEGACIÓN DEL PROCESO
+--------------------------------------------------------- */
+
+.proceso-etapas {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    margin-bottom: 70px;
+}
+
+
+/* Línea horizontal */
+
+.proceso-etapas::before {
+    content: "";
+
+    position: absolute;
+
+    top: 22px;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background: #cbd1d8;
+}
+
+
+/* Botón de cada etapa */
+
+.etapa-proceso {
+    position: relative;
+    z-index: 2;
+
+    border: none;
+    background: transparent;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    padding-right: 20px;
+}
+
+
+/* Número */
+
+.etapa-numero {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--blanco);
+
+    border: 1px solid #cbd1d8;
+
+    color: var(--azul);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.etapa-nombre {
+    display: block;
+
+    margin-top: 17px;
+
+    color: var(--gris);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    transition: color 0.3s ease;
+}
+
+
+/* Hover */
+
+.etapa-proceso:hover .etapa-numero {
+    border-color: var(--amarillo);
+
+    transform: translateY(-3px);
+}
+
+
+.etapa-proceso:hover .etapa-nombre {
+    color: var(--azul);
+}
+
+
+/* Activo */
+
+.etapa-proceso.activo .etapa-numero {
+    background: var(--amarillo);
+
+    color: var(--azul-oscuro);
+
+    border-color: var(--amarillo);
+}
+
+
+.etapa-proceso.activo .etapa-nombre {
+    color: var(--azul);
+
+}
+
+
+/* ---------------------------------------------------------
+   DETALLE DE ETAPA
+--------------------------------------------------------- */
+
+.proceso-detalle {
+    display: grid;
+    grid-template-columns: 0.42fr 1fr;
+
+    gap: 80px;
+
+    min-height: 340px;
+
+    padding: 65px;
+
+    background: var(--azul-oscuro);
+    color: white;
+}
+
+
+/* Número grande */
+
+.proceso-detalle-numero {
+    position: relative;
+
+    color: var(--amarillo);
+
+    font-size: clamp(6rem, 13vw, 11rem);
+    font-weight: 300;
+    line-height: 0.8;
+
+    letter-spacing: -0.07em;
+}
+
+
+/* Información */
+
+.proceso-detalle-contenido {
+    max-width: 650px;
+}
+
+
+.proceso-etiqueta {
+    display: block;
+
+    color: var(--amarillo);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    margin-bottom: 15px;
+}
+
+
+.proceso-detalle-contenido h3 {
+    color: white;
+
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    line-height: 1.05;
+    font-weight: 400;
+
+    margin-bottom: 25px;
+}
+
+
+.proceso-detalle-contenido p {
+    color: rgba(255,255,255,0.68);
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+
+    margin-bottom: 27px;
+}
+
+
+/* Lista */
+
+.proceso-lista {
+    list-style: none;
+}
+
+
+.proceso-lista li {
+    position: relative;
+
+    padding: 10px 0 10px 23px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+
+    color: rgba(255,255,255,0.87);
+
+    font-size: 0.87rem;
+}
+
+
+.proceso-lista li::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 19px;
+
+    width: 8px;
+    height: 2px;
+
+    background: var(--amarillo);
+}
+
+
+/* =========================================================
+   RESPONSIVE PROCESO
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .proceso-encabezado {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+
+    .proceso-intro {
+        justify-self: start;
+    }
+
+
+    .proceso-etapas {
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 40px 20px;
+    }
+
+
+    .proceso-etapas::before {
+        display: none;
+    }
+
+
+    .proceso-detalle {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+
+    .proceso-detalle-numero {
+        font-size: 7rem;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    #proceso {
+        padding: 100px 0;
+    }
+
+
+    .proceso-etapas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .proceso-detalle {
+        padding: 40px 25px;
+    }
+
+}/* =========================================================
+   06 CONTACTO
+========================================================= */
+
+#contacto {
+    position: relative;
+    overflow: hidden;
+
+    padding: 140px 0 90px;
+
+    background: var(--azul-oscuro);
+    color: white;
+}
+
+
+/* Geometría decorativa */
+
+#contacto::before {
+    content: "M";
+    position: absolute;
+
+    right: -40px;
+    bottom: -120px;
+
+    color: rgba(255,255,255,0.025);
+
+    font-size: clamp(22rem, 45vw, 45rem);
+    font-weight: 800;
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+
+.contacto-contenido {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ---------------------------------------------------------
+   ENCABEZADO
+--------------------------------------------------------- */
+
+#contacto .numero-seccion {
+    color: var(--amarillo);
+}
+
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+
+    gap: 110px;
+
+    align-items: start;
+}
+
+
+/* ---------------------------------------------------------
+   INFORMACIÓN IZQUIERDA
+--------------------------------------------------------- */
+
+.contacto-info h2 {
+    color: white;
+
+    margin-bottom: 30px;
+}
+
+
+.contacto-intro {
+    max-width: 500px;
+
+    color: rgba(255,255,255,0.63);
+
+    font-size: 1rem;
+    line-height: 1.8;
+
+    margin-bottom: 60px;
+}
+
+
+/* Datos */
+
+.contacto-datos {
+    display: flex;
+    flex-direction: column;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+
+.contacto-dato {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+
+    gap: 20px;
+
+    padding: 20px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+
+.contacto-dato span {
+    color: var(--amarillo);
+
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+
+.contacto-dato a,
+.contacto-dato p {
+    color: rgba(255,255,255,0.85);
+
+    font-size: 0.88rem;
+}
+
+
+.contacto-dato a {
+    transition: color 0.3s ease;
+}
+
+
+.contacto-dato a:hover {
+    color: var(--amarillo);
+}
+/* ---------------------------------------------------------
+   LOGO EN CONTACTO
+--------------------------------------------------------- */
+
+.contacto-logo {
+    margin-top: 95px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contacto-logo img {
+    width: min(290px, 78%);
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* ---------------------------------------------------------
+   FORMULARIO
+--------------------------------------------------------- */
+
+.formulario-proyecto {
+    padding: 55px;
+
+    background: white;
+
+    color: var(--texto);
+}
+
+
+.formulario-encabezado {
+    margin-bottom: 40px;
+}
+
+
+.formulario-etiqueta {
+    display: block;
+
+    color: var(--amarillo);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    margin-bottom: 12px;
+}
+
+
+.formulario-encabezado h3 {
+    color: var(--azul-oscuro);
+
+    font-size: clamp(1.8rem, 3vw, 2.7rem);
+    font-weight: 400;
+    line-height: 1.1;
+
+    margin-bottom: 15px;
+}
+
+
+.formulario-encabezado p {
+    color: var(--gris);
+
+    font-size: 0.88rem;
+}
+
+
+/* Campos */
+
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px 20px;
+}
+
+
+.campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+
+.campo label {
+    color: var(--azul);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+
+    padding: 14px 0;
+
+    border: none;
+    border-bottom: 1px solid var(--linea);
+
+    background: transparent;
+
+    color: var(--texto);
+
+    font-family: inherit;
+    font-size: 0.92rem;
+
+    outline: none;
+
+    transition: border-color 0.3s ease;
+}
+
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--amarillo);
+}
+
+
+.campo textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+
+/* Botón */
+
+.formulario-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 35px;
+}
+
+
+.formulario-nota {
+    max-width: 320px;
+
+    color: var(--gris);
+
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+
+.boton-enviar {
+    border: none;
+
+    background: var(--azul);
+    color: white;
+
+    cursor: pointer;
+}
+
+
+.boton-enviar:hover {
+    background: var(--amarillo);
+    color: var(--azul-oscuro);
+}
+
+
+/* Mensaje de prueba */
+
+.mensaje-formulario {
+    display: none;
+
+    margin-top: 25px;
+    padding: 15px 18px;
+
+    border-left: 3px solid var(--amarillo);
+
+    background: var(--gris-claro);
+
+    color: var(--azul);
+
+    font-size: 0.83rem;
+}
+
+
+.mensaje-formulario.visible {
+    display: block;
+}
+/* ---------------------------------------------------------
+   WHATSAPP
+--------------------------------------------------------- */
+
+.contacto-whatsapp {
+    margin-top: 35px;
+
+    text-align: center;
+}
+
+
+.separador-whatsapp {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+}
+
+
+.separador-whatsapp::before,
+.separador-whatsapp::after {
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: var(--linea);
+}
+
+
+.separador-whatsapp span {
+    padding: 0 16px;
+
+    color: var(--gris);
+
+    background: white;
+
+    font-size: 0.72rem;
+    text-transform: uppercase;
+}
+
+
+.contacto-whatsapp p {
+    color: var(--gris);
+
+    font-size: 0.82rem;
+
+    margin-bottom: 15px;
+}
+
+
+.boton-whatsapp {
+    width: 100%;
+    min-height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    padding: 0 24px;
+
+    border: 1px solid #25D366;
+
+    color: #15843f;
+    background: transparent;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.boton-whatsapp:hover {
+    background: #25D366;
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+.icono-whatsapp {
+    width: 21px;
+    height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icono-whatsapp svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    position: relative;
+
+    background: var(--azul-oscuro);
+    color: white;
+}
+
+
+.footer-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 40px;
+
+    padding: 50px 0;
+
+    border-top: 1px solid rgba(255,255,255,0.13);
+}
+
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+
+    transition: opacity 0.3s ease;
+}
+
+
+.footer-logo img {
+    width: 150px;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+}
+
+
+.footer-logo:hover {
+    opacity: 0.78;
+}
+
+
+.footer-texto {
+    color: rgba(255,255,255,0.45);
+
+    font-size: 0.7rem;
+    text-align: right;
+}
+
+
+/* =========================================================
+   RESPONSIVE CONTACTO
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .contacto-grid {
+        grid-template-columns: 1fr;
+
+        gap: 70px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    #contacto {
+        padding: 100px 0 60px;
+    }
+
+
+    .formulario-proyecto {
+        padding: 35px 25px;
+    }
+
+
+    .formulario-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .campo-completo {
+        grid-column: auto;
+    }
+
+
+    .formulario-acciones {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .contacto-dato {
+        grid-template-columns: 1fr;
+
+        gap: 6px;
+    }
+
+
+    .footer-contenido {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .footer-texto {
+        text-align: left;
+    }
+
+}
+        /* =========================================================
+           TRANSICIÓN
+        ========================================================= */
+
+        .continuar {
+            padding: 80px 0;
+
+            background: var(--gris-claro);
+
+            text-align: center;
+        }
+
+        .continuar span {
+            display: block;
+
+            color: var(--amarillo);
+
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+
+            margin-bottom: 15px;
+        }
+
+        .continuar h2 {
+            color: var(--azul);
+
+            font-size: clamp(2rem, 4vw, 3.7rem);
+            font-weight: 400;
+        }
+
+        /* =========================================================
+           ANIMACIONES
+        ========================================================= */
+
+        .revelar {
+            opacity: 0;
+            transform: translateY(35px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .revelar.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 950px) {
+
+            nav a:not(.boton-nav) {
+                display: none;
+            }
+
+            .inicio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inicio-contenido {
+                min-height: 70vh;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                padding-top: 140px;
+                padding-right: 7vw;
+            }
+
+            .inicio-imagen {
+                height: 60vh;
+                min-height: 420px;
+            }
+
+            .inicio-imagen::after {
+                display: none;
+            }
+
+            .numero-inicio {
+                display: none;
+            }
+
+            .nosotros-grid {
+                grid-template-columns: 1fr;
+                gap: 70px;
+            }
+
+            .nosotros-imagen {
+                min-height: 450px;
+            }
+
+            .servicios-contenido {
+                grid-template-columns: 1fr;
+                gap: 70px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navegacion {
+                height: 75px;
+            }
+
+            .boton-nav {
+                padding: 10px 14px;
+                font-size: 0.68rem;
+            }
+
+            .logo-principal {
+                font-size: 1.25rem;
+            }
+
+            .inicio-contenido h1 {
+                font-size: 3.2rem;
+            }
+
+            #nosotros,
+            #servicios {
+                padding: 100px 0;
+            }
+
+            .linea-tiempo {
+                grid-template-columns: 1fr;
+                gap: 45px;
+
+                margin-top: 70px;
+            }
+
+            .linea-tiempo::before {
+                top: 0;
+                bottom: 0;
+                left: 13px;
+                right: auto;
+
+                width: 1px;
+                height: auto;
+            }
+
+            .evento {
+                padding-left: 55px;
+            }
+
+            .punto {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .servicio-linea {
+                grid-template-columns: 40px 1fr auto;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =======================================================
+         NAVEGACIÓN
+    ======================================================== -->
+
+    <header>
+
+        <div class="contenedor navegacion">
+
+            <a href="#inicio" class="logo">
+
+                <span class="logo-principal">
+                    M&M
+                </span>
+
+                <span class="logo-secundario">
+                    Asociados
+                </span>
+
+            </a>
+
+
+            <nav>
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#nosotros">
+                    Nosotros
+                </a>
+
+                <a href="#servicios">
+                    Servicios
+                </a>
+
+                <a href="#proyectos">
+                    Proyectos
+                </a>
+
+                <a href="#proceso">
+                    Proceso
+                </a>
+
+                <a href="#contacto" class="boton-nav">
+                    Contacto
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         01 INICIO
+    ======================================================== -->
+
+    <section id="inicio">
+
+        <div class="inicio-grid">
+
+            <div class="inicio-contenido">
+
+                <div class="inicio-etiqueta">
+                    <span></span>
+                    Ingeniería + Arquitectura
+                </div>
+
+
+                <h1>
+                    Ingeniería que
+                    <strong>transforma ideas</strong>
+                    en realidad.
+                </h1>
+
+
+                <p>
+                    Diseño, planificación y ejecución de soluciones
+                    integrales de ingeniería y arquitectura para
+                    proyectos civiles, industriales y comerciales.
+                </p>
+
+
+                <div class="botones-inicio">
+
+                    <a
+                        href="#servicios"
+                        class="boton boton-principal"
+                    >
+                        Explorar proyectos
+                        <span>→</span>
+                    </a>
+
+
+                    <a
+                        href="#contacto"
+                        class="boton boton-secundario"
+                    >
+                        Cotizar un proyecto
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="inicio-imagen">
+
+                <div class="marca-imagen">
+
+                    <span>
+                        Ingeniería · Arquitectura · Construcción
+                    </span>
+
+                    <span>
+                        M&M
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="numero-inicio">
+            01 ───── M&M ASOCIADOS
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         02 NOSOTROS
+    ======================================================== -->
+
+    <section id="nosotros">
+
+        <div class="contenedor">
+
+
+            <div class="numero-seccion revelar">
+                02 / Nosotros
+            </div>
+
+
+            <div class="nosotros-grid">
+
+                <div class="nosotros-texto revelar">
+
+                    <h2 class="titulo-seccion">
+                        Experiencia que
+                        se convierte en
+                        soluciones.
+                    </h2>
+
+
+                    <p class="texto-gris">
+                        M&M Asociados nace de una trayectoria dedicada
+                        a convertir desafíos técnicos en proyectos
+                        construidos con planificación, responsabilidad
+                        y compromiso.
+                    </p>
+
+
+                    <div class="frase">
+                        “Nos define no solo el resultado,
+                        sino la forma en que lo logramos.”
+                    </div>
+
+                </div>
+
+
+                <div class="nosotros-imagen revelar">
+
+                    <div class="datos-imagen">
+
+                        <strong>
+                            1995
+                        </strong>
+
+                        <span>
+                            Inicio de una trayectoria
+                            dedicada a la ingeniería
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LINEA DE TIEMPO -->
+
+            <div class="linea-tiempo revelar">
+
+                <div class="evento">
+
+                    <div class="punto"></div>
+
+                    <span class="anio">
+                        1995
+                    </span>
+
+                    <h3>
+                        Inicio de trayectoria
+                    </h3>
+
+                    <p>
+                        Comienza una trayectoria profesional
+                        vinculada directamente con el desarrollo
+                        y ejecución de proyectos.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <div class="punto"></div>
+
+                    <span class="anio">
+                        2008
+                    </span>
+
+                    <h3>
+                        Constructora M&M
+                    </h3>
+
+                    <p>
+                        Se funda Constructora M&M, consolidando
+                        la experiencia adquirida en el sector.
+                    </p>
+
+                </div>
+
+
+                <div class="evento">
+
+                    <div class="punto"></div>
+
+                    <span class="anio">
+                        2023
+                    </span>
+
+                    <h3>
+                        Nueva etapa
+                    </h3>
+
+                    <p>
+                        Una alianza estratégica fortalece
+                        el crecimiento y evolución de
+                        M&M Asociados.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         03 SERVICIOS
+    ======================================================== -->
+
+    <section id="servicios">
+
+        <div class="contenedor servicios-contenido">
+
+
+            <div class="servicios-intro revelar">
+
+                <div class="numero-seccion">
+                    03 / Servicios
+                </div>
+
+
+                <h2 class="titulo-seccion">
+                    Soluciones
+                    integrales de
+                    ingeniería y
+                    construcción.
+                </h2>
+
+
+                <p>
+                    Acompañamos cada proyecto desde su análisis
+                    y planificación hasta su ejecución,
+                    seguimiento y entrega.
+                </p>
+
+            </div>
+
+
+            <div class="revelar">
+
+                <div class="lista-servicios">
+
+
+                    <button
+                        class="servicio activo"
+                        data-servicio="tierras"
+                        type="button"
+                    >
+
+                        <span class="servicio-linea">
+
+                            <span class="servicio-numero">
+                                01
+                            </span>
+
+                            <span class="servicio-titulo">
+                                Movimiento de tierras
+                            </span>
+
+                            <span class="flecha">
+                                ↗
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="servicio"
+                        data-servicio="urbanizaciones"
+                        type="button"
+                    >
+
+                        <span class="servicio-linea">
+
+                            <span class="servicio-numero">
+                                02
+                            </span>
+
+                            <span class="servicio-titulo">
+                                Urbanizaciones
+                            </span>
+
+                            <span class="flecha">
+                                ↗
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="servicio"
+                        data-servicio="civil"
+                        type="button"
+                    >
+
+                        <span class="servicio-linea">
+
+                            <span class="servicio-numero">
+                                03
+                            </span>
+
+                            <span class="servicio-titulo">
+                                Obra civil
+                            </span>
+
+                            <span class="flecha">
+                                ↗
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="servicio"
+                        data-servicio="industrial"
+                        type="button"
+                    >
+
+                        <span class="servicio-linea">
+
+                            <span class="servicio-numero">
+                                04
+                            </span>
+
+                            <span class="servicio-titulo">
+                                Obra industrial
+                            </span>
+
+                            <span class="flecha">
+                                ↗
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="servicio"
+                        data-servicio="ingenieria"
+                        type="button"
+                    >
+
+                        <span class="servicio-linea">
+
+                            <span class="servicio-numero">
+                                05
+                            </span>
+
+                            <span class="servicio-titulo">
+                                Servicios generales de ingeniería
+                            </span>
+
+                            <span class="flecha">
+                                ↗
+                            </span>
+
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div
+                    class="detalle-servicio"
+                    id="detalleServicio"
+                >
+
+                    <h3>
+                        Movimiento de tierras
+                    </h3>
+
+                    <p>
+                        Terracería, excavaciones, pavimentaciones,
+                        cortes, rellenos y trabajos topográficos
+                        para el desarrollo adecuado de cada proyecto.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         INDICACIÓN DE CONTINUIDAD
+    ======================================================== -->
+
+    <section class="continuar">
+<!-- =======================================================
+     04 PROYECTOS
+======================================================== -->
+
+<section id="proyectos">
+
+    <div class="contenedor">
+
+
+        <!-- ENCABEZADO -->
+
+        <div class="numero-seccion revelar">
+            04 / Proyectos
+        </div>
+
+
+        <div class="proyectos-encabezado">
+
+            <h2 class="titulo-seccion revelar">
+                Experiencia
+                construida.
+            </h2>
+
+
+            <p class="proyectos-intro revelar">
+                Una selección de proyectos ejecutados en distintos
+                sectores, escalas y regiones, desarrollados bajo
+                criterios técnicos de planificación, calidad y
+                cumplimiento.
+            </p>
+
+        </div>
+
+
+        <!-- FILTROS -->
+
+        <div class="filtros-proyectos revelar">
+
+            <button
+                class="filtro-proyecto activo"
+                data-filtro="todos"
+                type="button"
+            >
+                Todos
+            </button>
+
+
+            <button
+                class="filtro-proyecto"
+                data-filtro="industrial"
+                type="button"
+            >
+                Industrial
+            </button>
+
+
+            <button
+                class="filtro-proyecto"
+                data-filtro="civil"
+                type="button"
+            >
+                Obra civil
+            </button>
+
+
+            <button
+                class="filtro-proyecto"
+                data-filtro="urbanizacion"
+                type="button"
+            >
+                Urbanizaciones
+            </button>
+
+
+            <button
+                class="filtro-proyecto"
+                data-filtro="tierras"
+                type="button"
+            >
+                Movimiento de tierras
+            </button>
+
+        </div>
+
+
+
+        <!-- GRID -->
+
+        <div class="grid-proyectos">
+
+
+            <!-- PROYECTO 01 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="industrial"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-01.png"
+                        alt="Montaje de nave industrial en Teculután"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            01
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Obra industrial
+                            </span>
+
+                            <h3>
+                                Montaje de nave industrial
+                                sobre techo existente
+                            </h3>
+
+                            <p>
+                                Teculután, Zacapa
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Obra industrial
+                        </span>
+
+                        <h3>
+                            Montaje de nave industrial
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Teculután, Zacapa
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROYECTO 02 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="civil"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-02.png"
+                        alt="Estructura y cubierta en Huehuetenango"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            02
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Obra civil
+                            </span>
+
+                            <h3>
+                                Estructura +
+                                cubierta
+                            </h3>
+
+                            <p>
+                                Huehuetenango
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Obra civil
+                        </span>
+
+                        <h3>
+                            Estructura + cubierta
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Huehuetenango
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROYECTO 03 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="civil"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-03.png"
+                        alt="Muros de contención Semiagro"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            03
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Obra civil
+                            </span>
+
+                            <h3>
+                                Muros de contención
+                                Complejo Semiagro
+                            </h3>
+
+                            <p>
+                                Santa Lucía Los Ocotes, Guatemala
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Obra civil
+                        </span>
+
+                        <h3>
+                            Muros de contención
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Santa Lucía Los Ocotes
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROYECTO 04 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="urbanizacion"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-04.png"
+                        alt="Fundición de pavimento en Santa Catarina Pinula"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            04
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Urbanizaciones
+                            </span>
+
+                            <h3>
+                                Fundición de pavimento
+                                Bulevar Las Flores
+                            </h3>
+
+                            <p>
+                                Santa Catarina Pinula
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Urbanizaciones
+                        </span>
+
+                        <h3>
+                            Fundición de pavimento
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Santa Catarina Pinula
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROYECTO 05 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="tierras"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-05.png"
+                        alt="Trabajos en Tecnopark"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            05
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Movimiento de tierras
+                            </span>
+
+                            <h3>
+                                Proyecto
+                                Tecnopark
+                            </h3>
+
+                            <p>
+                                Escuintla
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Movimiento de tierras
+                        </span>
+
+                        <h3>
+                            Tecnopark
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Escuintla
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROYECTO 06 -->
+
+            <article
+                class="proyecto revelar"
+                data-categoria="industrial"
+            >
+
+                <div class="proyecto-imagen">
+
+                    <img
+                        src="imagenes/proyectos/proyecto-06.png"
+                        alt="Estructura y cubierta de almacén en Amatitlán"
+                    >
+
+
+                    <div class="proyecto-overlay">
+
+                        <span class="proyecto-numero">
+                            06
+                        </span>
+
+
+                        <div class="proyecto-overlay-contenido">
+
+                            <span class="proyecto-overlay-categoria">
+                                Obra industrial
+                            </span>
+
+                            <h3>
+                                Estructura + cubierta
+                                de almacén
+                            </h3>
+
+                            <p>
+                                Amatitlán
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="proyecto-info">
+
+                    <div>
+
+                        <span class="proyecto-categoria">
+                            Obra industrial
+                        </span>
+
+                        <h3>
+                            Estructura + cubierta
+                        </h3>
+
+                        <p class="proyecto-ubicacion">
+                            Amatitlán
+                        </p>
+
+                    </div>
+
+                    <span class="proyecto-flecha">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- CIERRE -->
+
+        <div class="proyectos-cierre revelar">
+
+            <p>
+                Cada proyecto representa una combinación de
+                planificación, capacidad técnica y ejecución
+                orientada al cumplimiento de los objetivos
+                establecidos.
+            </p>
+
+
+            <a
+                href="#contacto"
+                class="boton boton-secundario"
+            >
+                Hablemos de su proyecto
+                <span>→</span>
+            </a>
+
+        </div>
+
+
+    </div>
+
+<!-- =======================================================
+     05 NUESTRO PROCESO
+======================================================== -->
+
+<section id="proceso">
+
+    <div class="contenedor proceso-contenido">
+
+
+        <!-- ENCABEZADO -->
+
+        <div class="numero-seccion revelar">
+            05 / Nuestro proceso
+        </div>
+
+
+        <div class="proceso-encabezado">
+
+            <h2 class="titulo-seccion revelar">
+                Del análisis
+                a la entrega.
+            </h2>
+
+
+            <p class="proceso-intro revelar">
+                Cada proyecto se desarrolla bajo una metodología
+                estructurada que permite coordinar diseño,
+                planificación, ejecución y control hasta alcanzar
+                su entrega final.
+            </p>
+
+        </div>
+
+
+
+        <!-- ETAPAS -->
+
+        <div class="proceso-etapas revelar">
+
+
+            <button
+                class="etapa-proceso activo"
+                data-etapa="iniciacion"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    01
+                </span>
+
+                <span class="etapa-nombre">
+                    Iniciación
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="etapa-proceso"
+                data-etapa="planificacion"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    02
+                </span>
+
+                <span class="etapa-nombre">
+                    Planificación
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="etapa-proceso"
+                data-etapa="diseno"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    03
+                </span>
+
+                <span class="etapa-nombre">
+                    Diseño
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="etapa-proceso"
+                data-etapa="ejecucion"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    04
+                </span>
+
+                <span class="etapa-nombre">
+                    Ejecución
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="etapa-proceso"
+                data-etapa="control"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    05
+                </span>
+
+                <span class="etapa-nombre">
+                    Seguimiento y control
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="etapa-proceso"
+                data-etapa="cierre"
+                type="button"
+            >
+
+                <span class="etapa-numero">
+                    06
+                </span>
+
+                <span class="etapa-nombre">
+                    Cierre
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- DETALLE DINÁMICO -->
+
+        <div
+            class="proceso-detalle revelar"
+            id="detalleProceso"
+        >
+
+            <div
+                class="proceso-detalle-numero"
+                id="numeroProceso"
+            >
+                01
+            </div>
+
+
+            <div class="proceso-detalle-contenido">
+
+                <span class="proceso-etiqueta">
+                    Etapa del proyecto
+                </span>
+
+
+                <h3 id="tituloProceso">
+                    Iniciación
+                </h3>
+
+
+                <p id="descripcionProceso">
+                    Contacto directo para comprender la necesidad,
+                    los objetivos y el alcance general del proyecto.
+                </p>
+
+
+                <ul
+                    class="proceso-lista"
+                    id="listaProceso"
+                >
+
+                    <li>
+                        Identificación de necesidades
+                    </li>
+
+                    <li>
+                        Definición de objetivos
+                    </li>
+
+                    <li>
+                        Determinación del alcance inicial
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+    </div>
+<!-- =======================================================
+     06 CONTACTO
+======================================================== -->
+
+<section id="contacto">
+
+    <div class="contenedor contacto-contenido">
+
+
+        <div class="numero-seccion revelar">
+            06 / Contacto
+        </div>
+
+
+        <div class="contacto-grid">
+
+
+            <!-- INFORMACIÓN -->
+
+            <div class="contacto-info revelar">
+
+                <h2 class="titulo-seccion">
+                    Construyamos
+                    el próximo
+                    proyecto.
+                </h2>
+
+
+                <p class="contacto-intro">
+                    Cuéntenos sobre su proyecto.
+                    Nuestro equipo puede acompañarlo desde
+                    la planificación y diseño hasta su
+                    ejecución y entrega.
+                </p>
+
+
+                <div class="contacto-datos">
+
+
+                    <div class="contacto-dato">
+
+                        <span>
+                            Ubicación
+                        </span>
+
+                        <p>
+                            La Esperanza, Quetzaltenango
+                        </p>
+
+                    </div>
+
+
+                    <div class="contacto-dato">
+
+                        <span>
+                            Correo
+                        </span>
+
+                        <a href="mailto:eder.miranda@mymasociados.com.gt">
+                            eder.miranda@mymasociados.com.gt
+                        </a>
+
+                    </div>
+
+
+                    <div class="contacto-dato">
+
+                        <span>
+                            Teléfono
+                        </span>
+
+                        <a href="tel:+50257336461">
+                            +502 5733-6461
+                        </a>
+
+                    </div>
+                    <div class="contacto-logo">
+
+    <img
+        src="logo-mm.png"
+        alt="M&M Asociados"
+    >
+
+</div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORMULARIO -->
+
+            <div class="formulario-proyecto revelar">
+
+                <div class="formulario-encabezado">
+
+                    <span class="formulario-etiqueta">
+                        Solicitud de proyecto
+                    </span>
+
+
+                    <h3>
+                        Hablemos de su idea.
+                    </h3>
+
+
+                    <p>
+                        Complete la información básica para conocer
+                        mejor las necesidades de su proyecto.
+                    </p>
+
+                </div>
+
+
+                <form id="formularioContacto">
+
+
+                    <div class="formulario-grid">
+
+
+                        <div class="campo">
+
+                            <label for="nombre">
+                                Nombre
+                            </label>
+
+                            <input
+                                id="nombre"
+                                name="nombre"
+                                type="text"
+                                placeholder="Nombre completo"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="telefono">
+                                Teléfono
+                            </label>
+
+                            <input
+                                id="telefono"
+                                name="telefono"
+                                type="tel"
+                                placeholder="+502"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="correo">
+                                Correo
+                            </label>
+
+                            <input
+                                id="correo"
+                                name="correo"
+                                type="email"
+                                placeholder="correo@ejemplo.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="tipoProyecto">
+                                Tipo de proyecto
+                            </label>
+
+                            <select
+                                id="tipoProyecto"
+                                name="tipoProyecto"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccione una opción
+                                </option>
+
+                                <option value="Movimiento de tierras">
+                                    Movimiento de tierras
+                                </option>
+
+                                <option value="Urbanización">
+                                    Urbanización
+                                </option>
+
+                                <option value="Obra civil">
+                                    Obra civil
+                                </option>
+
+                                <option value="Obra industrial">
+                                    Obra industrial
+                                </option>
+
+                                <option value="Servicios de ingeniería">
+                                    Servicios de ingeniería
+                                </option>
+
+                                <option value="Otro">
+                                    Otro
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="ubicacionProyecto">
+                                Ubicación del proyecto
+                            </label>
+
+                            <input
+                                id="ubicacionProyecto"
+                                name="ubicacionProyecto"
+                                type="text"
+                                placeholder="Municipio / Departamento"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="areaProyecto">
+                                Área aproximada
+                            </label>
+
+                            <input
+                                id="areaProyecto"
+                                name="areaProyecto"
+                                type="text"
+                                placeholder="Ej. 500 m²"
+                            >
+
+                        </div>
+
+
+                        <div class="campo campo-completo">
+
+                            <label for="mensaje">
+                                Cuéntenos sobre el proyecto
+                            </label>
+
+                            <textarea
+                                id="mensaje"
+                                name="mensaje"
+                                placeholder="Describa brevemente el proyecto, necesidades, alcance o etapa actual..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="formulario-acciones">
+
+                        <p class="formulario-nota">
+                            La información será utilizada únicamente
+                            para atender su solicitud.
+                        </p>
+
+
+                        <button
+                            type="submit"
+                            class="boton boton-enviar"
+                        >
+                            Enviar solicitud
+                            <span>→</span>
+                        </button>
+
+                    </div>
+
+<!-- CONTACTO DIRECTO POR WHATSAPP -->
+
+<div class="contacto-whatsapp">
+
+    <div class="separador-whatsapp">
+        <span>
+            o
+        </span>
+    </div>
+
+
+    <p>
+        ¿Prefiere una comunicación más directa?
+    </p>
+
+
+    <a
+        href="https://wa.me/50257336461?text=Hola%2C%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20un%20proyecto%20con%20M%26M%20Asociados."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="boton-whatsapp"
+    >
+
+        <span class="icono-whatsapp">
+
+    <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+    >
+        <path
+            fill="currentColor"
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.009-.371-.011-.57-.011-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.875 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+        />
+        <path
+            fill="currentColor"
+            d="M12.004 2C6.486 2 2 6.486 2 12c0 1.762.461 3.48 1.337 4.992L2 22l5.128-1.345A9.963 9.963 0 0 0 12.004 22C17.52 22 22 17.514 22 12S17.52 2 12.004 2zm0 18.176a8.13 8.13 0 0 1-4.143-1.133l-.297-.176-3.043.798.812-2.966-.193-.305A8.12 8.12 0 0 1 3.828 12c0-4.507 3.668-8.176 8.176-8.176 4.507 0 8.172 3.669 8.172 8.176 0 4.508-3.665 8.176-8.172 8.176z"
+        />
+    </svg>
+
+</span>
+
+        Comunicarse por WhatsApp
+
+        <span>
+            ↗
+        </span>
+
+    </a>
+
+</div>
+                    <div
+                        class="mensaje-formulario"
+                        id="mensajeFormulario"
+                    >
+                        Formulario completado correctamente.
+                        Esta versión todavía funciona como demostración
+                        y no envía información al servidor.
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================== -->
+
+<footer>
+
+    <div class="contenedor footer-contenido">
+
+
+  <a
+    href="#inicio"
+    class="footer-logo"
+    aria-label="Volver al inicio"
+>
+
+    <img
+        src="logo-mm.png"
+        alt="M&M Asociados"
+    >
+
+</a>
+
+
+        <p class="footer-texto">
+            Ingeniería · Arquitectura · Construcción
+            <br>
+            M&M Asociados S.A.
+        </p>
+
+
+    </div>
+
+</footer>
+</section>
+
+
+    <!-- =======================================================
+         JAVASCRIPT
+    ======================================================== -->
+
+    <script>
+
+        /* ---------------------------------------------------------
+           INFORMACIÓN DE SERVICIOS
+        --------------------------------------------------------- */
+
+        const informacionServicios = {
+
+            tierras: {
+                titulo: "Movimiento de tierras",
+                descripcion:
+                    "Terracería, excavaciones, pavimentaciones, cortes, rellenos y trabajos topográficos para el desarrollo adecuado de cada proyecto."
+            },
+
+            urbanizaciones: {
+                titulo: "Urbanizaciones",
+                descripcion:
+                    "Desarrollo de infraestructura urbana, incluyendo drenajes, agua potable, carreteras, banquetas, bordillos, muros, cisternas y sistemas de tratamiento."
+            },
+
+            civil: {
+                titulo: "Obra civil",
+                descripcion:
+                    "Construcción de viviendas, edificios, iglesias, salones, remodelaciones, fachadas y trabajos relacionados con obra gris y acabados."
+            },
+
+            industrial: {
+                titulo: "Obra industrial",
+                descripcion:
+                    "Estructuras metálicas, bodegas, pasarelas, mezanines, gradas, tuberías, trabajos en acero inoxidable y soluciones especializadas para instalaciones industriales."
+            },
+
+            ingenieria: {
+                titulo: "Servicios generales de ingeniería",
+                descripcion:
+                    "Consultorías, estudios topográficos, diseño, planificación y supervisión técnica de proyectos."
+            }
+
+        };
+
+
+        const botonesServicio =
+            document.querySelectorAll(".servicio");
+
+        const detalleServicio =
+            document.getElementById("detalleServicio");
+
+
+        botonesServicio.forEach((boton) => {
+
+            boton.addEventListener("click", () => {
+
+                botonesServicio.forEach((item) => {
+                    item.classList.remove("activo");
+                });
+
+
+                boton.classList.add("activo");
+
+
+                const servicio =
+                    boton.dataset.servicio;
+
+                const informacion =
+                    informacionServicios[servicio];
+
+
+                detalleServicio.innerHTML = `
+
+                    <h3>
+                        ${informacion.titulo}
+                    </h3>
+
+                    <p>
+                        ${informacion.descripcion}
+                    </p>
+
+                `;
+
+            });
+
+        });
+
+
+        /* ---------------------------------------------------------
+           ANIMACIÓN AL HACER SCROLL
+        --------------------------------------------------------- */
+
+        const elementos =
+            document.querySelectorAll(".revelar");
+
+
+        const observador =
+            new IntersectionObserver(
+
+                (entradas) => {
+
+                    entradas.forEach((entrada) => {
+
+                        if (entrada.isIntersecting) {
+
+                            entrada.target
+                                .classList
+                                .add("visible");
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.15
+                }
+
+            );
+
+
+        elementos.forEach((elemento) => {
+
+            observador.observe(elemento);
+
+        });
+/* ---------------------------------------------------------
+   FILTROS DE PROYECTOS
+--------------------------------------------------------- */
+
+const filtrosProyectos =
+    document.querySelectorAll(".filtro-proyecto");
+
+const proyectos =
+    document.querySelectorAll(".proyecto");
+
+
+filtrosProyectos.forEach((filtro) => {
+
+    filtro.addEventListener("click", () => {
+
+        /* Quitar selección anterior */
+        filtrosProyectos.forEach((boton) => {
+            boton.classList.remove("activo");
+        });
+
+
+        /* Activar filtro seleccionado */
+        filtro.classList.add("activo");
+
+
+        const categoria =
+            filtro.dataset.filtro;
+
+
+        /* Mostrar u ocultar proyectos */
+        proyectos.forEach((proyecto) => {
+
+            const categoriaProyecto =
+                proyecto.dataset.categoria;
+
+
+            if (
+                categoria === "todos" ||
+                categoria === categoriaProyecto
+            ) {
+
+                proyecto.classList.remove("oculto");
+
+            } else {
+
+                proyecto.classList.add("oculto");
+
+            }
+
+        });
+
+    });
+
+});
+ /* ---------------------------------------------------------
+   NUESTRO PROCESO
+--------------------------------------------------------- */
+
+const informacionProceso = {
+
+    iniciacion: {
+
+        numero: "01",
+
+        titulo: "Iniciación",
+
+        descripcion:
+            "Contacto directo para comprender la necesidad, los objetivos y el alcance general del proyecto.",
+
+        lista: [
+            "Identificación de necesidades",
+            "Definición de objetivos",
+            "Determinación del alcance inicial"
+        ]
+
+    },
+
+
+    planificacion: {
+
+        numero: "02",
+
+        titulo: "Planificación",
+
+        descripcion:
+            "Se desarrolla un plan detallado que organiza los recursos, tiempos y metodología necesaria para ejecutar correctamente el proyecto.",
+
+        lista: [
+            "Cronograma de trabajo",
+            "Especificaciones técnicas",
+            "Presupuesto",
+            "Coordinación de equipos de trabajo",
+            "Organización y metodología de ejecución"
+        ]
+
+    },
+
+
+    diseno: {
+
+        numero: "03",
+
+        titulo: "Diseño",
+
+        descripcion:
+            "La etapa de diseño desarrolla la información técnica necesaria para definir y coordinar correctamente el proyecto.",
+
+        lista: [
+            "Estudios de suelos",
+            "Análisis estructural y mecánico",
+            "Planos arquitectónicos",
+            "Planos estructurales",
+            "Planos hidrosanitarios",
+            "Planos eléctricos",
+            "Especificaciones técnicas"
+        ]
+
+    },
+
+
+    ejecucion: {
+
+        numero: "04",
+
+        titulo: "Ejecución",
+
+        descripcion:
+            "El proyecto pasa de la planificación a la construcción mediante una secuencia organizada de actividades técnicas.",
+
+        lista: [
+            "Trabajos preliminares",
+            "Excavaciones y rellenos",
+            "Cimentaciones",
+            "Estructuras",
+            "Instalaciones",
+            "Acabados",
+            "Limpieza final"
+        ]
+
+    },
+
+
+    control: {
+
+        numero: "05",
+
+        titulo: "Seguimiento y control",
+
+        descripcion:
+            "Durante el desarrollo se controla el avance físico y financiero del proyecto mediante coordinación entre supervisión, gerencia y cliente.",
+
+        lista: [
+            "Control de avance físico",
+            "Control financiero",
+            "Supervisión profesional",
+            "Coordinación técnica",
+            "Cruce y revisión de información"
+        ]
+
+    },
+
+
+    cierre: {
+
+        numero: "06",
+
+        titulo: "Cierre",
+
+        descripcion:
+            "La etapa final comprende la entrega formal del proyecto, documentación y cierre administrativo.",
+
+        lista: [
+            "Entrega del proyecto",
+            "Documentación final",
+            "Cierre administrativo",
+            "Respaldo técnico",
+            "Garantía de 12 meses"
+        ]
+
+    }
+
+};
+
+
+
+const botonesProceso =
+    document.querySelectorAll(".etapa-proceso");
+
+
+const numeroProceso =
+    document.getElementById("numeroProceso");
+
+
+const tituloProceso =
+    document.getElementById("tituloProceso");
+
+
+const descripcionProceso =
+    document.getElementById("descripcionProceso");
+
+
+const listaProceso =
+    document.getElementById("listaProceso");
+
+
+
+botonesProceso.forEach((boton) => {
+
+    boton.addEventListener("click", () => {
+
+
+        /* Quitar activo anterior */
+
+        botonesProceso.forEach((item) => {
+            item.classList.remove("activo");
+        });
+
+
+        /* Activar etapa */
+
+        boton.classList.add("activo");
+
+
+        const etapa =
+            boton.dataset.etapa;
+
+
+        const informacion =
+            informacionProceso[etapa];
+
+
+        /* Cambiar información */
+
+        numeroProceso.textContent =
+            informacion.numero;
+
+
+        tituloProceso.textContent =
+            informacion.titulo;
+
+
+        descripcionProceso.textContent =
+            informacion.descripcion;
+
+
+        listaProceso.innerHTML =
+            informacion.lista
+                .map((elemento) => `<li>${elemento}</li>`)
+                .join("");
+
+    });
+
+});
+/* ---------------------------------------------------------
+   FORMULARIO DE CONTACTO
+--------------------------------------------------------- */
+
+const formularioContacto =
+    document.getElementById("formularioContacto");
+
+
+const mensajeFormulario =
+    document.getElementById("mensajeFormulario");
+
+
+formularioContacto.addEventListener("submit", (evento) => {
+
+    evento.preventDefault();
+
+
+    if (!formularioContacto.checkValidity()) {
+
+        formularioContacto.reportValidity();
+
+        return;
+
+    }
+
+
+    mensajeFormulario.classList.add("visible");
+
+});
+    </script>
+
+</body>
+</html>
