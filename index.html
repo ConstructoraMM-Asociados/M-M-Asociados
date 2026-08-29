@@ -3600,7 +3600,16 @@ footer {
                 </div>
 
 
-                <form id="formularioContacto">
+                <form
+    id="formularioContacto"
+    action="https://formspree.io/f/xvkogbwd"
+    method="POST"
+>
+<input
+    type="hidden"
+    name="_subject"
+    value="Nueva solicitud de proyecto - M&M Asociados"
+>
 
 
                     <div class="formulario-grid">
@@ -3648,7 +3657,7 @@ footer {
 
                             <input
                                 id="correo"
-                                name="correo"
+                                name="email"
                                 type="email"
                                 placeholder="correo@ejemplo.com"
                                 required
@@ -3822,12 +3831,10 @@ footer {
 
 </div>
                     <div
-                        class="mensaje-formulario"
-                        id="mensajeFormulario"
-                    >
-                        Formulario completado correctamente.
-                        Esta versión todavía funciona como demostración
-                        y no envía información al servidor.
+                    <div
+    class="mensaje-formulario"
+    id="mensajeFormulario"
+></div>
                     </div>
 
 
@@ -4262,21 +4269,25 @@ botonesProceso.forEach((boton) => {
 
 });
 /* ---------------------------------------------------------
-   FORMULARIO DE CONTACTO
+   FORMULARIO DE CONTACTO - FORMSPREE
 --------------------------------------------------------- */
 
 const formularioContacto =
     document.getElementById("formularioContacto");
 
-
 const mensajeFormulario =
     document.getElementById("mensajeFormulario");
 
+const botonEnviar =
+    formularioContacto.querySelector(".boton-enviar");
 
-formularioContacto.addEventListener("submit", (evento) => {
+
+formularioContacto.addEventListener("submit", async (evento) => {
 
     evento.preventDefault();
 
+
+    /* Validar campos */
 
     if (!formularioContacto.checkValidity()) {
 
@@ -4287,7 +4298,75 @@ formularioContacto.addEventListener("submit", (evento) => {
     }
 
 
-    mensajeFormulario.classList.add("visible");
+    /* Cambiar estado del botón */
+
+    const textoOriginal =
+        botonEnviar.innerHTML;
+
+    botonEnviar.disabled = true;
+
+    botonEnviar.innerHTML =
+        "Enviando...";
+
+
+    try {
+
+        const datosFormulario =
+            new FormData(formularioContacto);
+
+
+        const respuesta =
+            await fetch(formularioContacto.action, {
+
+                method: "POST",
+
+                body: datosFormulario,
+
+                headers: {
+                    "Accept": "application/json"
+                }
+
+            });
+
+
+        if (respuesta.ok) {
+
+            mensajeFormulario.textContent =
+                "Su solicitud fue enviada correctamente. Nuestro equipo se pondrá en contacto con usted.";
+
+            mensajeFormulario.classList.add("visible");
+
+
+            /* Limpiar formulario */
+
+            formularioContacto.reset();
+
+        } else {
+
+            mensajeFormulario.textContent =
+                "No fue posible enviar la solicitud. Por favor intente nuevamente o comuníquese por WhatsApp.";
+
+            mensajeFormulario.classList.add("visible");
+
+        }
+
+
+    } catch (error) {
+
+        mensajeFormulario.textContent =
+            "Ocurrió un problema de conexión. Por favor intente nuevamente o comuníquese por WhatsApp.";
+
+        mensajeFormulario.classList.add("visible");
+
+    }
+
+
+    /* Restaurar botón */
+
+    botonEnviar.disabled = false;
+
+    botonEnviar.innerHTML =
+        textoOriginal;
 
 });
     </script>
